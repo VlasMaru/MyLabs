@@ -9,7 +9,6 @@
 #include <SFML/Window.hpp>
 namespace vm
 {
-	setlocale(LC_ALL, "Rus");
 	
 
 	class Kometa
@@ -20,43 +19,43 @@ namespace vm
 		float g = 9.78;
 
 		float m_x = 0;
-		float m_y = 0; // начальная координата 
-		float m_x_ace = 165; //ускорение по оси oy
-		float m_y_ace = 10; //ускорение по оси ox
+		float m_y = 0; // start point 
+		float m_x_ace = 165; //acceleration
+		float m_y_ace = 10; 
 
-		float m_a = 60; //угол в градусах
+		float m_a = 60; //angle in degrees
 		float m_v_o = std::sqrt(m_x_ace * m_x_ace + m_y_ace * m_y_ace); 
 		float m_rotat = -35;
 		float m_plus_rotat = 0.15;
 		float m_time = 0;
 		sf::Texture* m_texture = nullptr;
 		sf::Sprite* m_sprite = nullptr;
-		float rotation_cycle = (m_time / 0.02); //0.02 - ход времени
+		float rotation_cycle = (m_time / 0.02); //0.02 - time step
 
 	public:
 		    Kometa(float x, float y);
 			~Kometa();
-			//сеттеры
+			//Setters
 			bool SetUpKom(const std::string& name, float scale_x, float scale_y);
 			void SetKometAce(float xo, float yo);
 			void SetPlusRotation(int xr);
 			void SetStartRotation(float x);
 			void SetAngle(float x);
 			void SetTime(float t);
-			//геттеры
+			//Getters
 			void GetOnCurrentPosition();
 		
 		///////float GetSpriteX();
-		///////float GetSpriteY(); - доп функции
+		///////float GetSpriteY(); - add. funk.
 			sf::Sprite* GetSprite();
 	};
 
 	class Spaceship
 	{
 	private:
-		float m_x = 0; //
-		float m_y = 0; // начальные координаты
-		float m_a = 60; //угол в градусах
+		float m_x = 0;
+		float m_y = 0; 
+		float m_a = 60; 
 		float m_rotat = -35;
 		float m_time = 0;
 		float m_ace = 1;
@@ -66,12 +65,12 @@ namespace vm
 		Spaceship(float x, float y);
 		~Spaceship();
 
-		//сеттеры
+		//Setters
 		void SetShipAce(float acceleration);
 		void SetTime(float time);
 		void SetRotation(float rotation);
 		bool SetUpShip(const std::string& name, float scale_x, float scale_y);
-		//геттеры
+		//Getters
 		void GetOnCurrentPosition();
 		sf::Sprite* GetSprite();
 		float GetSpriteX();
@@ -93,11 +92,11 @@ namespace vm
 	public:
 		GasStation(float x, float y);
 		~GasStation();
-		//сеттеры
+		//Setters
 		bool SetUpGas(const std::string& name, float scale_x, float scale_y);
 		void SetRotation(float a);
 		void SetTime(float time);
-		//геттеры
+		//Getters
 		void GetOnCurrentPosition();
 		sf::Sprite* GetSprite();
 

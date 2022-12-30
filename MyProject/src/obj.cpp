@@ -7,10 +7,7 @@
 
 namespace vm
 {
-	setlocale(LC_ALL, "Rus");
-
-
-	// ƒвижение кометы описано с помощью формулы движени€ тела, брошенного под углом к горизонту с определЄнным ускорением пл
+	// The motion of a comet is described using the formula for the motion of a body thrown at an angle to the horizon with a certain acceleration along the axes
 	Kometa::Kometa(float x, float y)
 	{
 		m_x = x;
@@ -25,7 +22,7 @@ namespace vm
 			delete m_sprite;
 	};
 
-	//создаЄт спрайт и скейлит его
+	//creating sprite and scale
 	bool Kometa::SetUpKom(const std::string& name, float scale_x, float scale_y)
 	{
 		m_texture = new sf::Texture;
@@ -39,11 +36,11 @@ namespace vm
 		m_sprite->setScale(scale_x, scale_y);
 		return true;
 	}
-	//—еттеры ускорени€, вращени€,начального поворота спрайта, угла "броска"
+	//Setters
 	void Kometa::SetKometAce(float xo, float yo)
 	{
-		m_x_ace = xo; //ускорение по оси oy
-		m_y_ace = yo; //ускорение по оси ox
+		m_x_ace = xo; //x-axis acceleration
+		m_y_ace = yo; //y-axis acceleration
 	}
 	void Kometa::SetPlusRotation(int xr)
 	{
@@ -68,7 +65,7 @@ namespace vm
 		m_rotat = m_rotat + (m_plus_rotat * (m_time / 0.02));
 		m_sprite->setPosition((m_x + m_v_o * m_time * cos(m_Alpha)), (m_y - (sin(m_Alpha) * m_v_o - g * m_time) * m_time));
 		m_sprite->setRotation(m_rotat);
-		// выводим в консоль координаты и рисуем, но не выводим
+		// output the coordinates to the console and draw the frame
 		std::cout << (m_x + m_v_o * m_time * cos(m_Alpha)) << " ";
 		std::cout << (m_y - (sin(m_Alpha) * m_v_o - g * m_time) * m_time) << " ";
 		std::cout << m_time << std::endl;
@@ -79,7 +76,7 @@ namespace vm
     sf::Sprite* Kometa::GetSprite() { return m_sprite; }
 
 	
-	
+
 
 	    Spaceship::Spaceship(float x, float y)
 		{
