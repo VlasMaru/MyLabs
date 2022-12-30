@@ -6,6 +6,7 @@
 #include "funky.hpp"
 int main()
 {
+    setlocale(LC_ALL, "Rus");
     double t = 0;
     sf::RenderWindow window(sf::VideoMode(1250, 800), "My first animation!");
     // backWork
