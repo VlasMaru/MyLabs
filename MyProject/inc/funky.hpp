@@ -9,6 +9,7 @@
 #include <SFML/Window.hpp>
 namespace vm
 {
+	setlocale(LC_ALL, "Rus");
 	
 
 	class Kometa
