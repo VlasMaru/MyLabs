@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+/*Реализуйте класс String для работы со строками. Понятное дело, что std::string для реализации использовать нельзя, только char.
+
+У вас должны быть реализованы:
+1.	Базовый конструктор                                      +++
+2.	Конструктор копирования (правило 3-х)                    +++
+3.	Оператор присваивания копированием (правило 3-х)         +++
+4.	Деструктор (правило 3-х)                                 +++
+5.	Операторы + и +=
+6.	Оператор [] – чтение и изменение элемента
+7.	Операторы <, >, ==
+8.	Операторы ввода и вывода в поток
+9.	Метод find – поиск первого вхождения символа в строку слева
+10.	 Метод length – длина строки
+11.	 Метод c_str – получить массив char
+12.	 Метод at для получения доступа (чтение и изменение) к элементу строки с проверкой на выход за пределы строки
+*/
+
+
+class String
+{
+private:
+	size_t m_size = 0;
+	char* m_str = nullptr;
+public:
+	 /// standart constr + warned constr
+	String(const char* words): m_size( strlen(words)), m_str(new char[m_size+1]) // sentence
+	{
+		std::copy(words, words + m_size, m_str);
+		m_str[m_size] = 0;  //for termSym
+	};
+
+	String(int y, unsigned int x) = delete; // warned
+
+	String(char letter, unsigned int x)  // one letter->string
+	{
+		m_size = x;
+		m_str = new char[x + 1];
+		std::fill(m_str, m_str + x, letter);
+		m_str[m_size] = 0; //for termSym
+
+	}
+	///
+	
+	/// rull of 3
+	String(const String& other): String(other.m_str) //copy constr (!) + delig constr
+	{}
+
+	String& operator= (const String other) // copy assigment operator
+	{
+		String temp = other;
+		std::swap(this->m_size,temp.m_size);
+		std::swap(this->m_str, temp.m_str);
+		return *this;
+	}
+
+
+	~String() // destructor
+	{
+		if (m_str != nullptr) { delete[] m_str; }
+	}
+
+	///
+
+	void Print() // just printing
+	{
+		for (int i = 0; i < m_size; i++) { std::cout << m_str[i]; }
+		std::cout<<std::endl;
+	}
+};
+
+
+
+int main()
+{
+    String s1("Hellppppo");
+	String s2('a', 12);
+	String s3('c', 12);
+	s1.Print();
+	s2.Print();
+	s3.Print();
+    s2 = s1 = s3;
+	s1.Print();
+	s2.Print();
+	s3.Print();
+	
+}
