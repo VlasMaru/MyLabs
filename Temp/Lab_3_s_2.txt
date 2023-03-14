@@ -1,0 +1,137 @@
+#include <iostream>
+#include <string>
+
+
+
+/*Реализуйте класс Complex для работы с комплексными числами. Он должен включать:
+
+1.	Базовый конструктор               ++++
+
+2.	Конструктор копирования              +++
+3.	Оператор присваивания копированием   +++
+4.	Деструктор                           +++
+
+5.	Операторы += и +, *= и *
+
+6.	Оператор ++ префиксный и постфиксный (увеличение действительной части числа на 1)
+
+7.	Операторы ввода и вывода                +++
+
+Продемонстрируйте работу с классом.
+*/
+
+
+
+
+// Вопросы - работа копи и делега + структура (?)
+struct  ERRORS
+{
+	std::string e1 = "Input Error!";
+};
+
+
+
+
+class Complex
+{
+private:
+	ERRORS Error;
+	 long long m_real;
+	 long long m_imag;
+public:
+	// also my dudes
+	friend std::ostream& operator<< (std::ostream& out, const Complex& x);
+	friend std::istream& operator>> (std::istream& in, Complex& p);
+
+
+
+	/// standart constr 
+
+	explicit Complex() : m_real(0), m_imag(0)
+	{}
+
+	explicit Complex(long long real, long long imaginary)
+	{
+		m_real = real;
+		m_imag = imaginary;
+	}
+
+	explicit Complex(long long real)
+	{
+		m_real = real;
+	}
+	///
+
+	/// rull of 3
+	Complex(const Complex& other) : Complex(other.m_real,other.m_imag) //copy constr (!) + delig constr
+	{
+		std::cout << "Copy Constuctor!" << std::endl;
+	}
+
+	Complex& operator= (const Complex other) // copy assigment operator
+	{
+		Complex temp = other;
+		std::swap(this->m_real, temp.m_real);
+		std::swap(this->m_imag, temp.m_imag);
+		return *this;
+	};
+
+
+	~Complex() // destructor
+	{
+		std::cout << "Destructor!" << std::endl;
+	}
+
+	///
+
+	void Print() // just printing
+	{
+		std::cout << m_real << ' + ' << m_imag << 'i' << std::endl;
+	}
+
+	/*Complex& operator += (const Complex other)
+	{
+		Complex tempy = other;
+		tempy.m_real+=
+		//std::swap(temp.m_size, this->m_size);
+		//std::swap(temp.m_str, this->m_str);
+		return *this;
+	}
+	  String operator + (String other)
+	{
+		String copy_temp2 = other;
+		String copy_temp1 = *this;
+		copy_temp1 += copy_temp2;
+		return copy_temp1;
+
+	}*/
+
+};
+
+std::ostream& operator<< (std::ostream& out, const Complex& x)
+{
+	
+	std::cout << "Real part: " << std::endl;
+	out << x.m_real << std::endl;
+	std::cout << "Imaginary part: " << std::endl;
+	out << x.m_imag << 'i' << std::endl;
+
+	return out;
+}
+
+std::istream& operator>> (std::istream& in, Complex& p)
+{
+	std::cout << "Enter real part: " << std::endl;
+	in >> p.m_real;
+	std::cout << "Enter imaginary part: " << std::endl;
+	in >> p.m_imag;
+	return in;
+}
+
+int main()
+{
+	Complex num(4);
+	std::cin >> num;
+	std::cout << num;
+
+}
