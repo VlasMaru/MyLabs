@@ -1,0 +1,99 @@
+/*Лабораторная работа №5
+«Вектор bool»
+
+Реализуйте спецификацию шаблона для вектора из булевских значений. Помните, что на каждое значение должен быть потрачен только 1 бит памяти.
+Предусмотрите следующие операции:
+1.	Метод добавления в конец вектора
+2.	Метод и оператор получения и изменения значения по индексу
+3.	Метод size
+4.	Метод insert и erase
+
+Продемонстрируйте работу с классом.
+*/
+
+#include <iostream>
+
+template <typename my_type>
+class vector
+{
+};
+
+template<>
+class vector <bool>
+{
+private:
+	size_t m_mas_size_t;
+	char* m_masbol = new char[m_mas_size_t];
+public:
+	vector<bool>(bool masbol, size_t size): m_mas_size_t(size)
+	{
+		if (masbol == true)
+		{
+			for (int t = 0; t < size; t++)
+			{
+				m_masbol[t] = 't';
+			}
+		}
+		else
+		{
+			for (int t = 0; t < size; t++)
+			{
+				m_masbol[t] = 'f';
+			}
+		}
+	};
+	vector<bool>(size_t size ) : m_mas_size_t(size+1) //reading 'string' (char mas) from stream and ignoring char if it not 't' or 'f'
+	{
+		char* tfmas = new char[m_mas_size_t];
+		std::cin.get(tfmas, m_mas_size_t);
+		for (int x = 0; x < m_mas_size_t; x++)
+		{
+			if ((tfmas[x] == 't') or (tfmas[x] == 'f')) { m_masbol[x] = tfmas[x]; }
+			else{ m_masbol[x] = ' '; }
+		}
+
+		for (int x = 0; x < m_mas_size_t-1; x++)
+		{
+			if (m_masbol[x] == ' ')  
+			{
+				std::swap(m_masbol[x], m_masbol[x + 1]);
+			}
+		}
+		int empty = 0;
+		for (int x = m_mas_size_t; x > 0; x--)
+		{
+			if (m_masbol[x] == ' ') { empty += 1;}
+		}
+		size_t new_size = m_mas_size_t - empty;
+		char* new_tfmas = new char[new_size];
+		for (int x = 0; x < new_size; x++) { new_tfmas[x] = m_masbol[x]; }
+		std::swap(new_tfmas, m_masbol);
+		std::swap(new_size, m_mas_size_t);
+		delete[] tfmas;
+		delete[] new_tfmas;
+	}
+
+	~vector<bool>() { delete[]  m_masbol; };
+
+	void printv()
+	{
+		for (int x = 0; x < m_mas_size_t; x++)
+		{
+			std::cout << m_masbol[x] << ' ';
+		}
+		std::cout << std::endl;
+	}
+
+
+
+};
+
+
+
+
+int main()
+{
+	
+	vector <bool> vecc(6);
+	vecc.printv();
+}
