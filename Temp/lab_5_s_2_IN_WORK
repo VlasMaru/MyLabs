@@ -13,6 +13,12 @@
 
 #include <iostream>
 
+/*struct BoolBit
+{
+	bool b1 : 1;
+	bool b2 :
+};
+
 template <typename my_type>
 class vector
 {
@@ -25,7 +31,7 @@ private:
 	size_t m_mas_size_t;
 	char* m_masbol = new char[m_mas_size_t];
 public:
-	vector<bool>(bool masbol, size_t size): m_mas_size_t(size)
+	vector<bool>(bool masbol, size_t size) : m_mas_size_t(size)
 	{
 		if (masbol == true)
 		{
@@ -42,19 +48,19 @@ public:
 			}
 		}
 	};
-	vector<bool>(size_t size ) : m_mas_size_t(size+1) //reading 'string' (char mas) from stream and ignoring char if it not 't' or 'f'
+	vector<bool>(size_t size) : m_mas_size_t(size + 1) //reading 'string' (char mas) from stream and ignoring char if it not 't' or 'f'
 	{
 		char* tfmas = new char[m_mas_size_t];
 		std::cin.get(tfmas, m_mas_size_t);
 		for (int x = 0; x < m_mas_size_t; x++)
 		{
 			if ((tfmas[x] == 't') or (tfmas[x] == 'f')) { m_masbol[x] = tfmas[x]; }
-			else{ m_masbol[x] = ' '; }
+			else { m_masbol[x] = ' '; }
 		}
 
-		for (int x = 0; x < m_mas_size_t-1; x++)
+		for (int x = 0; x < m_mas_size_t - 1; x++)
 		{
-			if (m_masbol[x] == ' ')  
+			if (m_masbol[x] == ' ')
 			{
 				std::swap(m_masbol[x], m_masbol[x + 1]);
 			}
@@ -62,7 +68,7 @@ public:
 		int empty = 0;
 		for (int x = m_mas_size_t; x > 0; x--)
 		{
-			if (m_masbol[x] == ' ') { empty += 1;}
+			if (m_masbol[x] == ' ') { empty += 1; }
 		}
 		size_t new_size = m_mas_size_t - empty;
 		char* new_tfmas = new char[new_size];
@@ -74,6 +80,9 @@ public:
 	}
 
 	~vector<bool>() { delete[]  m_masbol; };
+
+
+
 
 	void printv()
 	{
@@ -93,7 +102,73 @@ public:
 
 int main()
 {
+
+	vector <bool> vecc(6);
+	vecc.printv();
+}*/
+
+#include <string>
+template <typename my_type>
+class vector
+{
+};
+
+template<>
+class vector <bool>
+{
+private:
+	size_t m_mas_size_t;
+	char* m_masbol = new char[m_mas_size_t];
+public:
+	vector<bool>(bool masbol, size_t size) : m_mas_size_t((size/8)+1)
+	{
+		int krat = size / 8;
+		int non_krat = size % 8;
+		for (int x = 0; x < m_mas_size_t; x++)
+		{
+			m_masbol[x] = 0x00;
+			for (int y = 0; y < 8; y++)
+			{
+				m_masbol[x] | masbol;
+				m_masbol[x] << 1;
+			}
+		}
+
+	};
 	
+
+	~vector<bool>() { delete[]  m_masbol; };
+
+
+
+
+	void printv()
+	{
+		std::string show = "";
+			for (int y = m_mas_size_t; y >= 0; y--)
+			{
+				for (int z = 0; z < 8; z++)
+				{
+					if (m_masbol[y]
+				}
+				
+				bank = bank >> 4;
+				std::cout << current_num << ' ';
+			}
+		std::cout << std::endl;
+	}
+
+
+ 
+};
+
+
+//реализуй перегруз [] (умножением побитовым на 1 и последующим сдвигом)
+ 
+
+int main()
+{
+
 	vector <bool> vecc(6);
 	vecc.printv();
 }
