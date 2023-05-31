@@ -1,0 +1,81 @@
+*Лабораторная работа №5
+«Вектор bool»
+
+Реализуйте спецификацию шаблона для вектора из булевских значений. Помните, что на каждое значение должен быть потрачен только 1 бит памяти.
+Предусмотрите следующие операции:
+1.	Метод добавления в конец вектора
+2.	Метод и оператор получения и изменения значения по индексу
+3.	Метод size
+4.	Метод insert и erase
+
+Продемонстрируйте работу с классом.
+*/
+
+#include <iostream>
+
+template <typename my_type>
+class vector
+{
+};
+
+template<>
+class vector <bool>
+{
+private:
+	size_t m_mas_size_t;
+	char* m_masbol = new char[m_mas_size_t];
+	int bit_size;
+public:
+
+	vector<bool>(bool masbol, size_t size) : m_mas_size_t((size / 8) + int(bool(size % 8))) , bit_size(size)
+	{
+		int krat = size / 8;
+		int non_krat = size % 8;
+		for (int x = 0; x < m_mas_size_t; x++)
+		{
+			m_masbol[x] = 0x00;
+			for (int y = 0; y < 8; y++)
+			{
+				m_masbol[x] | masbol;
+				m_masbol[x] << 1;
+			}
+		}
+
+	};
+
+
+	~vector<bool>() { delete[]  m_masbol; };
+
+
+
+
+	void printv()
+	{
+		std::string show = "";
+		for (int y = m_mas_size_t; y >= 0; y--)
+		{
+			
+
+			
+		}
+		std::cout << std::endl;
+	}
+
+
+
+};
+
+
+//реализуй перегруз [] (умножением побитовым на 1 и последующим сдвигом)
+
+};
+
+
+
+
+int main()
+{
+	
+	vector <bool> vecc();
+	vecc.printv();
+}
