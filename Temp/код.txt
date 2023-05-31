@@ -27,36 +27,44 @@ private:
 	int bit_size;
 public:
 
-	vector<bool>(bool masbol, size_t size) : m_mas_size_t((size / 8) + int(bool(size % 8))) , bit_size(size)
+	vector<bool>(bool masbol, size_t size) : m_mas_size_t((size / 8) + int(bool(size % 8))), bit_size(size)
 	{
-		int krat = size / 8;
-		int non_krat = size % 8;
 		for (int x = 0; x < m_mas_size_t; x++)
 		{
 			m_masbol[x] = 0x00;
 			for (int y = 0; y < 8; y++)
 			{
-				m_masbol[x] | masbol;
+				m_masbol[x] | char(masbol);
 				m_masbol[x] << 1;
 			}
 		}
-
 	};
 
+//ne rabotaet constructor, ne vidit pobitovoe umnojenie
 
 	~vector<bool>() { delete[]  m_masbol; };
 
 
 
-
 	void printv()
 	{
+		char templ;
+		char bitbite = 1;
+		int counter = 0;
 		std::string show = "";
-		for (int y = m_mas_size_t; y >= 0; y--)
+		for (int y = 0; y <= m_mas_size_t; y++)
 		{
-			
-
-			
+			templ = m_masbol[y];
+			for (int z = 0; z < 8; z++)
+			{
+				if (counter != bit_size)
+				{
+					if ((templ & bitbite) == 1) { std::cout << " True "; }
+					else if ((templ & bitbite) == 0) { std::cout << " False "; };
+					templ >> 1;
+					counter++;
+				}
+			}
 		}
 		std::cout << std::endl;
 	}
@@ -68,14 +76,14 @@ public:
 
 //реализуй перегруз [] (умножением побитовым на 1 и последующим сдвигом)
 
-};
+
 
 
 
 
 int main()
 {
-	
-	vector <bool> vecc();
+
+	vector <bool> vecc(true,3);
 	vecc.printv();
 }
